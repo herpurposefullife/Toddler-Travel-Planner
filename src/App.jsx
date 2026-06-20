@@ -166,12 +166,12 @@ export default function App() {
     doc.text("Toddler Travel Co.", marginX, 42);
     doc.setFont("helvetica", "normal");
     doc.setFontSize(10);
-    doc.text("small travelers deserve planners too", marginX, 60);
+    doc.text("Small Travelers Deserve Planners Too", marginX, 60);
 
     const tripLabel = TRIP_TYPES.find((t) => t.id === tripType)?.label || "";
     doc.setFontSize(9);
     doc.text(
-      `${tripLabel} trip · ${daysNum} day${daysNum === 1 ? "" : "s"} · ${adultsNum || 0} adult${(adultsNum || 0) === 1 ? "" : "s"}, ${toddlersNum} toddler${toddlersNum === 1 ? "" : "s"}`,
+      `${tripLabel} · ${daysNum} day${daysNum === 1 ? "" : "s"} · ${adultsNum || 0} adult${(adultsNum || 0) === 1 ? "" : "s"}, ${toddlersNum} toddler${toddlersNum === 1 ? "" : "s"}`,
       marginX,
       78
     );
@@ -239,9 +239,11 @@ export default function App() {
       if (checked) {
         doc.setFillColor(...sage);
         doc.roundedRect(marginX, y - 9, 11, 11, 2, 2, "F");
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(8);
-        doc.text("✓", marginX + 2.5, y - 0.5);
+        // Draw checkmark with lines instead of a Unicode glyph (default fonts don't render ✓ correctly)
+        doc.setDrawColor(255, 255, 255);
+        doc.setLineWidth(1.3);
+        doc.line(marginX + 2.3, y - 3.8, marginX + 4.5, y - 1.5);
+        doc.line(marginX + 4.5, y - 1.5, marginX + 8.5, y - 6.5);
       }
       doc.setFont("helvetica", "normal");
       doc.setFontSize(10.5);
@@ -312,7 +314,7 @@ export default function App() {
 
       <header className="topbar">
         <div className="topbar-inner">
-          <span className="brand">Toddler&nbsp;Travel&nbsp;Co. <span className="brand-sub">small travelers deserve planners too</span></span>
+          <span className="brand">Toddler&nbsp;Travel&nbsp;Co. <span className="brand-sub">Small Travelers Deserve Planners Too</span></span>
           <div className="progress-track">
             <div className="progress-fill" style={{ width: `${(step / 4) * 100}%` }} />
           </div>
